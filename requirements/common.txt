@@ -1,1 +1,4 @@
 django>=1.4,<1.5
+South==0.7.6
+celery==3.0.15
+django-celery==3.0.11
