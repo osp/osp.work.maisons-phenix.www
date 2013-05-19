@@ -5,8 +5,11 @@ from collection.tasks import add, transcode
 
 
 def sound_list(request):
-    add.delay(1, 2)
     return render(request, 'collection/sound_list.html', {"obj_list": Sound.objects.all()})
+
+
+def points(request):
+    return render(request, 'collection/points.html', {"obj_list": Sound.objects.all()})
 
 
 def convert(request, id):
