@@ -1,16 +1,19 @@
+from django import forms
 from django.contrib import admin
-from collection.models import Category, Completude, Nature, Sound, Relationship
+from collection.models import Sound
+from collection.widgets import AdminAudioWidget
 
 
-class RelationshipInline(admin.TabularInline):
-    model = Sound.tags.through
+class SoundAdminForm(forms.ModelForm):
+  class Meta:
+    model = Sound
+    widgets = {
+      'sound': AdminAudioWidget,
+    }
 
 
 class SoundAdmin(admin.ModelAdmin):
-    inlines = [RelationshipInline,]
+    form = SoundAdminForm
 
 
-admin.site.register(Category)
-admin.site.register(Completude)
-admin.site.register(Nature)
 admin.site.register(Sound, SoundAdmin)

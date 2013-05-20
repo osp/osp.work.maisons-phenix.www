@@ -3,15 +3,19 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css" type="text/css">
+    {% block head %}
+    <link href="{{ STATIC_URL }}lib/css/reset.css" type="text/css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}less/font.less" type="text/css" rel="stylesheet/less">
+    <link href="{{ STATIC_URL }}less/phenix.less" type="text/css" rel="stylesheet/less">
     <style>
         body {
             margin: 2em;
             font-size: 18px;
             line-height: 25px;
         }
-    a { text-decoration: none; white-space: pre; }
+        a { text-decoration: none; white-space: pre; }
     </style>
+    {% endblock %}
 </head>
 
 <body>
