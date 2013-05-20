@@ -6,8 +6,8 @@ from collection.tasks import transcode, ffmpeg2theora, ffmpeg2vp8
 import widgets 
 
 
-sys.path.append('/usr/lib/python2.7/site-packages/')
-import RDF
+#sys.path.append('/usr/lib/python2.7/site-packages/')
+#import RDF
 
 
 #options = "hash-type='bdb', contexts='yes', dir='%s'" % settings.RDF_STORAGE_DIR
