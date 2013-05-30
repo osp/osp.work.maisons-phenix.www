@@ -4,38 +4,112 @@ import os.path
 import hashlib
 try: import simplejson as json
 except ImportError: import json
+from django.conf import settings
+import svt
 
 
 def sha1(path):
     return hashlib.sha1(path).hexdigest()
 
 
-@task()
-def add(x, y):
-    return x + y
+def githash(path, block_size=2**20):
+    """ 
+    Returns an sha1 hash based on the content of a file.
+
+    Should produce the same SHA1 hash git uses for a particular file.
+    """
+    s = hashlib.sha1()
+
+    filesize = os.path.getsize(path)
+    s.update("blob %u\0" % filesize)
+
+    f = open(path, "rb")
+
+    while True:
+        data = f.read(block_size)
+        if not data:
+            break
+        s.update(data)
+
+    return s.hexdigest()
 
 
-def get_codec_types(path):
-    cmd = ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", path]
-    p1 = subprocess.Popen(cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-    (stdout_data, stderr_data) = p1.communicate()
-    codec_types = []
-    data = json.loads(stdout_data)
-    for stream in data['streams']:
-        codec_types.append(stream['codec_type'])
+# Adapted from http://blog.will-daly.com/2012/11/22/using-ffprobe-to-validate-video-content/
+class FFProbe:
+    """Wrapper for the ffprobe command"""
 
-    return codec_types
+    def get_streams_dict(self, url):
+        """ Returns a Python dictionary containing
+        information on the audio/video streams contained
+        in the file located at 'url'
+
+        If no stream information is available (e.g.
+        because the file is not a video), returns
+        an empty dictionary"""
+        command = self._ffprobe_command(url)
+        process = subprocess.Popen(command, stdout=subprocess.PIPE)
+        output, err = process.communicate()
+        return json.loads(output)
+
+    def _ffprobe_command(self, url):
+        return ['ffprobe',
+                '-v', 'quiet',
+                '-print_format', 'json',
+                '-show_streams',
+                str(url)]
+
+
+def get_stream_types(url):
+    """ Use ffprobe wrapper to check whether the file
+    at url is a valid video file """
+    ffprobe = FFProbe()
+
+    # Attempt to get the stream dictionary
+    # If any error occurs, assume the file not a video
+    try:
+        streamDict = ffprobe.get_streams_dict(url)
+    except Exception as e:
+        return False
+    # If there are no streams available,
+    # then the file is not a video
+    if 'streams' not in streamDict:
+        return False
+    # A dictionnary holding codec types
+    streams = []
+
+    # Check each stream, looking for a video
+    for streamInfo in streamDict['streams']:
+        # Check if the codec is a video
+        codecType = streamInfo['codec_type']
+
+        if codecType == 'video':
+            # Images are sometimes parsed as videos,
+            # so also check that there's at least
+            # 1 second of video
+            duration = streamInfo['duration']
+            if float(duration) > 1.0:
+                # It is a video, appends it
+                streams.append('video')
+
+        elif codecType == 'audio':
+            streams.append('audio')
+
+    # Returns the collected stream types
+    return streams
 
 
 @task()
 def transcode(path):
-    codec_types = get_codec_types(path)
+    stream_types = get_stream_types(path)
 
-    type = "video" if "video" in codec_types else "audio"
+    if not stream_types:
+        return None
 
-    if type is "video":
+    if 'video' in stream_types:
+        type = 'video'
         ext = ".ogv"
-    else:
+    elif 'audio' in stream_types:
+        type = 'audio'
         ext = ".oga"
 
     fn = "/home/aleray/work/osp.work.maisons-phenix.www/phenix/public/media/sound/"
@@ -56,7 +130,6 @@ def ffmpeg2theora(path):
         ext = "oga"
 
     fn = sha1(path) + ext
-    print(fn)
 
     cmd = ["ffmpeg"]
 
@@ -81,3 +154,24 @@ def ffmpeg2theora(path):
 @task()
 def ffmpeg2vp8(path):
     subprocess.call(["ffmpeg", "-i", path, "-vcodec", "libvpx", "bla.webm"])
+
+
+@task()
+def wav2spectrogram(path):
+    fn = '%s.png' % githash(path)
+
+    input_file = path
+    output_file_w = ''  # not used as wavefile is set to `0`
+    output_file_s = os.path.join(settings.MEDIA_ROOT, 'spectrograms', fn)
+    image_width = 600
+    image_height = 50
+    fft_size = 2048
+    f_max = 22050
+    f_min = 10
+    wavefile = 0
+    palette = 3
+    channel = 1
+
+    args = (input_file, output_file_w, output_file_s, image_width, image_height, fft_size, f_max, f_min, wavefile, palette, channel)
+
+    svt.create_png(*args)

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from collection.models import Sound
-from collection.tasks import add, transcode
+from collection.tasks import transcode
 
 
 def sound_list(request):

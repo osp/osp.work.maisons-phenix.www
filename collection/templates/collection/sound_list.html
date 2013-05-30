@@ -2,96 +2,18 @@
 
 {% block body %}
 <ul>
-    {% for obj in obj_list %}
-    <li><a rel="embed" href="{% url convert id=obj.id %}">get ogg for {{ obj.name }}</a></li> 
+    {% for object in object_list %}
+    <li>
+        <img src="{{ object.spectrogram_url }}" />
+        <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
 
+
 {% block js %}
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
-$(function() {
-
-    function loader($el, delay) {
-        delay = delay || 200;
-        //var chars = "⠁⠂⠄⡀⢀⠠⠐⠈".split("");
-        var chars = [
-            ">))'>        ",
-            "    >))'>    ",
-            "        >))'>",
-            "    <'((<    ",
-            "<'((<        "
-        ]
-        var i = Math.floor(Math.random() * chars.length);
-        var timer = setInterval(function(){
-            $el.html(chars[ i++ % chars.length ]);
-        }, delay);
-
-        // public method to stop the animation
-        this.stop = function() {
-            clearInterval(timer);
-        }
-    }
-
-
-    $('a[rel="embed"]').each(function(event) {
-        var that = this;
-        var ld1;
-
-        //event.preventDefault();
-        
-        $.ajax($(this).attr("href"), {
-            dataType: 'text',
-            beforeSend: function () {
-                console.log("before send...");
-                ld1 = new loader($(that));
-            },
-            success: function (data) {
-                console.log("success...");
-                console.log(data);
-
-                function pull () {
-                    $.ajax("/djcelery/" + data + "/status/", {
-                        dataType: 'json',
-                        beforeSend: function () {
-                            console.log("before send...");
-                        },
-                        success: function (data) {
-                            console.log("success...");
-                            console.log(data);
-
-                            if (data.task.status == "PENDING") {
-                                window.setTimeout(pull, 250);
-                            } else {
-                                console.log("***", data.task.result);
-                                ld1.stop();
-                                data.task.result = data.task.result;
-                                if (data.task.result.type === "audio") {
-                                    $(that).replaceWith('<audio src="/media/sound/' + data.task.result.url + '" autoplay controls></audio>');
-                                } else {
-                                    $(that).replaceWith('<video src="/media/sound/' + data.task.result.url + '" autoplay controls></video>');
-                                }
-                            }
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            alert("An error occured: " + xhr.status + " " + thrownError);
-                        },
-                        complete: function () {
-                        }
-                    });
-                }
-
-                pull()
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert("An error occured: " + xhr.status + " " + thrownError);
-            },
-            complete: function () {
-            }
-        });
-    });
-});
-</script>
-
+{{ block.super }}
+<script src="{{ STATIC_URL }}lib/js/less-1.3.0.min.js"></script>
 {% endblock %}
+
