@@ -1,22 +1,11 @@
 import os.path
-from fabric.contrib.project import rsync_project
-from fabric.context_managers import lcd
-from fabric.api import run, local, put, cd, sudo, env
+from fabric.api import run, local, put, cd, sudo, env, prefix
 from fabric.contrib.console import confirm
-import tempfile
 
 
-#def production():
-    #env.hosts = ['stdin@mozzarella.stdin.fr']
-    #env.path = '/home/stdin/www/bla/'
-
-
-#def fix_permissions():
-    ## fixes permission issues
-    #sudo('chown -R %s:www-data %s' % (env.user, env.path))
-    #sudo('chmod -R g+w %sesadgv' % env.path)
-    #sudo('apache2ctl graceful')
-
-
-def deploy(treeish='HEAD'):
-    pass
+def download():
+    """synchronizes the local db and media files from the remote ones"""
+    db_path = '/srv/data_phenix/fr.stdin.phenix/db/phenix.db'
+    media_path = '/srv/data_phenix/fr.stdin.phenix/documents/media'
+    local('scp phenix:%s phenix/' % db_path)
+    local('rsync -avz --progress --stats phenix:%s phenix/public/' % media_path)
