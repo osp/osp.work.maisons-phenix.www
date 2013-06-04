@@ -1,0 +1,36 @@
+@import "elements.less";
+
+
+html, body {
+    width: 100%;
+}
+
+body {
+    font-family: 'News Cycle', serif;
+    color: darkgrey;
+}
+
+.fragment {
+    width: 25%;
+    float: left;
+    padding: 10px;
+    .box-sizing(border-box);
+    overflow: hidden;
+
+    textarea {
+        font-size: smaller;
+        width: 100%;
+        .box-sizing(border-box);
+        height: 100px;
+    }
+
+    textarea + p {
+        text-align: center;
+    }
+
+    audio {
+        max-width: 100%;
+    }
+}
+
+

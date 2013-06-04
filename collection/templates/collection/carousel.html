@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+
+<html version="HTML+RDFa 1.1" lang="fr"
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+xmlns:cc="http://creativecommons.org/ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:foaf="http://xmlns.com/foaf/0.1/"
+xmlns:aa="http://activearchives.org/terms/">
+
+<head>
+    <meta charset="utf-8"/>
+    {% block head %}
+    <link href="{{ STATIC_URL }}lib/css/reset.css" type="text/css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}less/font.less" type="text/css" rel="stylesheet/less">
+    <link href="{{ STATIC_URL }}less/carousel.less" type="text/css" rel="stylesheet/less">
+    <link href="{{ STATIC_URL }}less/jquery.jcursor.less" type="text/css" rel="stylesheet/less">
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+<div class='fragment'>
+<form>
+<textarea name="query">
+PREFIX aa:<http://activearchives.org/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT DISTINCT ?title
+WHERE { 
+    ?s aa:nature "parole"@fr .
+    ?s dc:title ?title.
+}
+</textarea>
+<p><button>OK</button></p>
+</form>
+<form>
+<ul class="results"></ul>
+</form>
+</div>
+
+
+<div class='fragment'>
+<form>
+<textarea name="query">
+PREFIX aa:<http://activearchives.org/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT DISTINCT ?title
+WHERE { 
+    ?s aa:nature "parole"@fr .
+    ?s dc:title ?title.
+}
+</textarea>
+<p><button>OK</button></p>
+</form>
+<form>
+<ul class="results"></ul>
+</form>
+</div>
+
+
+<div class='fragment'>
+<form>
+<textarea name="query">
+PREFIX aa:<http://activearchives.org/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT DISTINCT ?title
+WHERE { 
+    ?s aa:nature "parole"@fr .
+    ?s dc:title ?title.
+}
+</textarea>
+<p><button>OK</button></p>
+</form>
+<form>
+<ul class="results"></ul>
+</form>
+</div>
+
+
+<div class='fragment'>
+<form>
+<textarea name="query">
+PREFIX aa:<http://activearchives.org/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT DISTINCT ?title
+WHERE { 
+    ?s aa:nature "parole"@fr .
+    ?s dc:title ?title.
+}
+</textarea>
+<p><button>OK</button></p>
+</form>
+<form>
+<ul class="results"></ul>
+</form>
+</div>
+
+
+{% endblock %}
+
+
+{% block js %}
+<script src="{{ STATIC_URL }}lib/js/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}lib/js/less-1.3.0.min.js"></script>
+<script src="{{ STATIC_URL }}js/carousel.js"></script>
+{% endblock %}
+</body>
+</html>

@@ -17,3 +17,7 @@ def convert(request, id):
     task = transcode.delay(sound.sound.path)
     #return redirect('celery-task_status', task_id=task.id)
     return HttpResponse(task.id, mimetype="text/plain")
+
+
+def carousel(request):
+    return render(request, 'collection/carousel.html', {})
