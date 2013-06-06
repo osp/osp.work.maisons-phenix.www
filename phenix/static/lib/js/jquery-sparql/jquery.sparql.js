@@ -16,7 +16,6 @@
  */
 (function($){
   $.aaql = function(query, callback) {
-    console.log(query);
     $.ajax("/aacore/sparql/", {
       headers: { 
           Accept: "application/sparql-result+json",
@@ -102,7 +101,6 @@
     };
     
     var _preproc = function(data) {
-        console.log(data);
       var results = data.query.results.sparql.result;
       var cleaned_results = [];
       for(var r in results) {

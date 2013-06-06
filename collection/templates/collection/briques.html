@@ -21,39 +21,36 @@ xmlns:aa="http://activearchives.org/terms/">
 </head>
 
 <body>
-{% block body %}
-<textarea id="keywords">
-nature:parole + nature:parole + theme:adolescence + nature:ambiance
-</textarea>
+    {% block body %}
+    <textarea id="keywords">nature:parole + theme:ambiance</textarea>
 
-<button id="btn-compose">composer</button>
-<button>jouer</button>
-<button>&lt;&lt;</button>
-<button>&gt;&gt;</button>
+    <button id="btn-compose">composer</button>
+    <button>jouer</button>
+    <button>&lt;&lt;</button>
+    <button>&gt;&gt;</button>
 
-<div id="composition"></div>
-
-{% endblock %}
+    <div id="composition"></div>
+    {% endblock %}
 
 
-{% block js %}
-<script id="brick-tmpl" type="text/template">
-<div class="briq">
-    <div class="icon-set">
-        <span class="icon icon-reload">✨</span>
-        <span class="icon icon-info">i</span>
-        <span class="icon icon-delete">×</span>
+    {% block js %}
+    <script id="brick-tmpl" type="text/template">
+    <div class="briq">
+        <div class="icon-set">
+            <span class="icon icon-reload">✨</span>
+            <span class="icon icon-info">i</span>
+            <span class="icon icon-delete">×</span>
+        </div>
+        <div class="title"><%= title %></div>
+        <img src="<%= spectrogram %>" />
     </div>
-    <div class="title"><%= title %></div>
-    <img src="<%= spectrogram %>" />
-</div>
-</script>
-<script src="{{ STATIC_URL }}lib/js/underscore-min.js"></script>
-<script src="{{ STATIC_URL }}lib/js/jquery.min.js"></script>
-<script src="{{ STATIC_URL }}lib/js/less-1.3.0.min.js"></script>
-<script src="{{ STATIC_URL }}lib/js/jquery-sparql/urlEncode.js"></script>
-<script src="{{ STATIC_URL }}lib/js/jquery-sparql/jquery.sparql.js"></script>
-<script src="{{ STATIC_URL }}js/briques.js"></script>
-{% endblock %}
+    </script>
+    <script src="{{ STATIC_URL }}lib/js/underscore-min.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/less-1.3.0.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery-sparql/urlEncode.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery-sparql/jquery.sparql.js"></script>
+    <script src="{{ STATIC_URL }}js/briques.js"></script>
+    {% endblock %}
 </body>
 </html>
