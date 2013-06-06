@@ -8,6 +8,16 @@ from django.conf import settings
 import svt
 
 
+def get_sound_duration(fname):
+    import wave
+    import contextlib
+    with contextlib.closing(wave.open(fname,'r')) as f:
+        frames = f.getnframes()
+        rate = f.getframerate()
+        duration = frames / float(rate)
+        return duration
+
+
 def sha1(path):
     return hashlib.sha1(path).hexdigest()
 
@@ -157,13 +167,13 @@ def ffmpeg2vp8(path):
 
 
 @task()
-def wav2spectrogram(path):
+def wav2spectrogram(path, width=600):
     fn = '%s.png' % githash(path)
 
     input_file = path
     output_file_w = ''  # not used as wavefile is set to `0`
     output_file_s = os.path.join(settings.MEDIA_ROOT, 'spectrograms', fn)
-    image_width = 600
+    image_width = width
     image_height = 50
     fft_size = 2048
     f_max = 22050

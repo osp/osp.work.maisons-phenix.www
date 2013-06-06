@@ -11,3 +11,7 @@ urlpatterns = patterns('collection.views',
     url(r'^$', ListView.as_view(model=Sound), name='sound-list'),
     url(r'^(?P<pk>\d+)/$', DetailView.as_view(model=Sound), name='sound-detail'),
 )
+
+urlpatterns += patterns('django.views.generic.simple',
+    (r'^briques/$', 'direct_to_template', {'template': 'collection/briques.html'}),
+)

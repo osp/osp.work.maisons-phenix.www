@@ -1,7 +1,7 @@
 import markdown
 from django.db import models
 from django.conf import settings
-from collection.tasks import transcode, ffmpeg2theora, ffmpeg2vp8, wav2spectrogram, githash
+from collection.tasks import transcode, ffmpeg2theora, ffmpeg2vp8, wav2spectrogram, githash, get_sound_duration
 import widgets
 import os
 from aacore.sniffers import AAResource
@@ -37,7 +37,13 @@ class Sound(models.Model):
     def save(self, *args, **kwargs):
         super(Sound, self).save(*args, **kwargs)
 
-        #wav2spectrogram(self.sound.path)
+        try:
+            duration = int(get_sound_duration(self.sound.path)) * 4
+            if duration < 11:
+                duration = 11
+            wav2spectrogram(self.sound.path, width=duration)
+        except RuntimeError:
+            pass
 
         # indexes the page in the RDF store
         #path = reverse('aawiki:page-detail', kwargs={'slug': slug})

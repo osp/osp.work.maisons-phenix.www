@@ -24,8 +24,9 @@ $(function() {
                 var key = data.head.vars[0];
                 results.empty();
                 for (var i = 0; i < data.results.bindings.length; i++) {
-                    //results.append('<li><audio src="' + data.results.bindings[i][key].value + '" controls></audio></li>');
+                    results.append('<li><audio src="' + data.results.bindings[i][key].value + '" controls></audio></li>');
                     results.append('<li>' + '<input type="radio" name="foo"/>' + data.results.bindings[i][key].value + '</li>');
+                    results.append('<li><img src="' + data.results.bindings[i]['spectro'].value + '" /></li>');
                 };
             },
             error: function (xhr, ajaxOptions, thrownError) {

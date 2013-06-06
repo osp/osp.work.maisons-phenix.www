@@ -5,11 +5,11 @@ from collection.widgets import AdminAudioWidget
 
 
 class SoundAdminForm(forms.ModelForm):
-  class Meta:
-    model = Sound
-    widgets = {
-      'sound': AdminAudioWidget,
-    }
+    class Meta:
+        model = Sound
+        widgets = {
+            'sound': AdminAudioWidget,
+        }
 
 
 class SoundAdmin(admin.ModelAdmin):
