@@ -58,7 +58,7 @@ $(function() {
                 .where("?resource", "aa:spectrogram", "?spectrogram");
 
             $.each(value, function(key, value) {
-                q.where("?resource","aa:" + key ,'"' + value + '"@fr')
+                q.where("?resource","aa:" + key ,'"' + value + '"')
             });
 
             q.execute(cbfunc);
