@@ -12,8 +12,16 @@ class SoundAdminForm(forms.ModelForm):
         }
 
 
+def save(modeladmin, request, queryset):
+    for obj in queryset:
+        obj.save()
+
+save.short_description = "Save selected sounds"
+
+
 class SoundAdmin(admin.ModelAdmin):
     form = SoundAdminForm
+    actions = [save]
 
 
 admin.site.register(Sound, SoundAdmin)
