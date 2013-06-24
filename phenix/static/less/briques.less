@@ -14,109 +14,149 @@ body {
     .box-sizing(border-box)
 }
 
-img {
-    display: inline-block;
-    /*outline: 1px solid red;*/
-}
 
-.icon {
-    text-align: center;
-    font-size: 13px;
-    width: 13px;
-    height: 13px;
-    display: inline-block;
-    background-color: white;
-    .border-radius(9px, 9px, 9px, 9px);
-    
-}
 
-.icon:hover {
-    color: black;
-    cursor: default;
-}
+.lateral-left {
+    width:47%;
 
-.icon-compose {
-    position: relative;
-    top: 3px;
-    left: 3px;
-    margin-left:3px;
-    width:auto;
-}
+      img {
+      display: inline-block;
+      /*outline: 1px solid red;*/
+      }
+      
+      
+      
+      .icon {
+	  text-align: center;
+	  font-size: 13px;
+	  width: 13px;
+	  height: 13px;
+	  display: inline-block;
+	  background-color: white;
+	  .border-radius(9px, 9px, 9px, 9px);
+	  
+      }
 
-.icon-set {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    display: none;
-}
+      .icon:hover {
+	  color: black;
+	  cursor: default;
+      }
 
-.icon-info {
-    font-style: italic;
-}
+      .icon-compose {
+	  position: relative;
+	  top: 3px;
+	  left: 3px;
+	  margin-left:3px;
+	  width:auto;
+      }
+      .icon-play {
+	  position: relative;
+	  top: 3px;
+	  left: 3px;
+	  margin-left:3px;
+	  width:auto;
+      }
+      .icon-next {
+	  position: relative;
+	  top: 3px;
+	  left: 3px;
+	  margin-left:3px;
+	  width:auto;
+      }
+      .icon-previous {
+	  position: relative;
+	  top: 3px;
+	  left: 3px;
+	  margin-left:3px;
+	  width:auto;
+      }
+      .icon-set {
+	  position: absolute;
+	  top: 3px;
+	  left: 3px;
+	  display: none;
+      }
 
-.title {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    background-color: white;
-    display: none;
-}
+      .icon-info {
+	  font-style: italic;
+      }
 
-.briq {
-    position: relative;
-    display: inline-block;
-}
+      .title {
+	  position: absolute;
+	  top: 3px;
+	  left: 3px;
+	  background-color: white;
+	  display: none;
+      }
 
-.briq:hover {
-    outline: 1px solid red;
-}
+      .briq {
+	  position: relative;
+	  display: inline-block;
+      }
 
-.briq:hover .icon-set {
-    display: block;
-}
+      .briq:hover {
+	  outline: 1px solid red;
+      }
 
-#keywords {
-    font-size: 28px;
-    line-height: 32px;
-}
+      .briq:hover .icon-set {
+	  display: block;
+      }
 
-input, button, textarea {
-    font-family: 'News Cycle', serif;
-}
+      #keywords {
+	  font-size: 28px;
+	  line-height: 32px;
+      }
 
-textarea {
-    width: 100%;
-    color: darkgrey;
-    border-color: white;
-    height: 200px;
-}
+      input, button, textarea {
+	  font-family: 'News Cycle', serif;
+      }
 
-textarea:focus {
-    outline: 1px solid darkgrey;
+      textarea {
+	  width: 100%;
+	  color: darkgrey;
+	  border-color: white;
+	  height: 200px;
+      }
 
-}
+      textarea:focus {
+	  outline: 1px solid darkgrey;
 
+      }
+ }
 
 
 
 
 
 h1{
-	text-transform:uppercase;
+    .table-cell {
+    display: table-cell;
+    padding:7px 23px;
+    font-size: 15px;
+    color: white;
+    background-color:darkgrey;
 
+    }
 }
+
+
+
 .laterale {
-	width:350px;
+	width:47%;
 	position:absolute;
 	right:0px;
 	top:0px;
-    bottom: 0px;
-    padding: 20px 0;
-    overflow-y: auto;
+	bottom: 0px;
+	padding: 20px 20px;
+	overflow-y: auto;
+	border: 1px solid lightgrey;
+
+   .playlist-selection{
+	margin:15px 0px;
+    }
     
     section {
-        border: 3px solid lightgrey;
-
+	margin-top:15px;
     }
     section.selected {
         border-color: darkgrey;
@@ -126,16 +166,46 @@ h1{
         text-align:center;
         width:10px;
         vertical-align:middle;
-        background-color:darkgrey;
-        color:white;
-    }   
+        background-color:white;
+        color:darkgrey;
 
+    }   
+            
+    .previous{
+      border-color: darkgrey;
+      border-right:1px solid darkgrey;
+
+    }
+    .metadata{
+      padding:0px 20px;
+
+    }
+    .next{
+      border-color: darkgrey;
+      border-left:1px solid darkgrey;
+
+    }
+ 
     .icon {
         background-color: white;
         color: darkgrey;
     }
     .icon:hover {
         color: black;
+    }
+    
+    dl{
+    
+    }
+    dt{
+      font-weight:bold;
+      clear: left;
+      float: left;
+      font-size:13px;
+      vertical-align:text-bottom;
+    }
+    dd{
+      float:left;
     }
 }
 
@@ -147,6 +217,7 @@ h1{
     display: table;
     width: 100%;
     margin:auto;
+    background-color:white;
 }
 
 .table-row {
@@ -157,6 +228,8 @@ h1{
 .table-cell {
     display: table-cell;
     padding:5px;
+    
+  
 }
 
 
