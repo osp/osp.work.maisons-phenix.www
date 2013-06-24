@@ -41,7 +41,7 @@ $(function() {
         return tree
     };
 
-    $('#btn-compose').on('click', function() {
+    $('.icon-compose').on('click', function() {
         composition.empty();
 
         var query = $('textarea').val();
