@@ -37,13 +37,7 @@ class Sound(models.Model):
     def save(self, *args, **kwargs):
         super(Sound, self).save(*args, **kwargs)
 
-        try:
-            duration = int(get_sound_duration(self.sound.path)) * 4
-            if duration < 11:
-                duration = 11
-            wav2spectrogram(self.sound.path, width=duration)
-        except RuntimeError:
-            pass
+       
 
         # indexes the page in the RDF store
         #path = reverse('aawiki:page-detail', kwargs={'slug': slug})

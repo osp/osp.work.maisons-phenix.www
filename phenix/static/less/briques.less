@@ -19,22 +19,18 @@ body {
 .lateral-left {
     width:47%;
 
+    
       img {
       display: inline-block;
       /*outline: 1px solid red;*/
-      }
-      
-      
+      }     
       
       .icon {
 	  text-align: center;
 	  font-size: 13px;
 	  width: 13px;
 	  height: 13px;
-	  display: inline-block;
-	  background-color: white;
-	  .border-radius(9px, 9px, 9px, 9px);
-	  
+	  display: inline;  
       }
 
       .icon:hover {
@@ -48,28 +44,17 @@ body {
 	  left: 3px;
 	  margin-left:3px;
 	  width:auto;
+	  border:thin solid darkgrey;
+	  padding:1px 2px;
       }
       .icon-play {
-	  position: relative;
+	  position: absolute;
 	  top: 3px;
 	  left: 3px;
 	  margin-left:3px;
 	  width:auto;
       }
-      .icon-next {
-	  position: relative;
-	  top: 3px;
-	  left: 3px;
-	  margin-left:3px;
-	  width:auto;
-      }
-      .icon-previous {
-	  position: relative;
-	  top: 3px;
-	  left: 3px;
-	  margin-left:3px;
-	  width:auto;
-      }
+   
       .icon-set {
 	  position: absolute;
 	  top: 3px;
@@ -105,6 +90,7 @@ body {
       #keywords {
 	  font-size: 28px;
 	  line-height: 32px;
+	  padding:10px;
       }
 
       input, button, textarea {
@@ -114,7 +100,9 @@ body {
       textarea {
 	  width: 100%;
 	  color: darkgrey;
-	  border-color: white;
+	  border-color: white ;
+	  border-top:2px solid darkgrey;
+	  border-left:2px solid darkgrey;
 	  height: 200px;
       }
 
@@ -129,14 +117,33 @@ body {
 
 
 h1{
+    display: inline;
+
     .table-cell {
-    display: table-cell;
+    display: inline;
+    float:left;
     padding:7px 23px;
     font-size: 15px;
     color: white;
     background-color:darkgrey;
 
     }
+}
+
+h2{
+    display: inline;
+    text-transform:uppercase;
+    font-weight:bold;
+
+
+    .table-cell {
+    display: inline;
+    float:left;
+    padding:7px 23px;
+    font-size: 15px;
+    color: darkgrey;
+    border:thin solid darkgrey;
+    }    
 }
 
 
@@ -147,12 +154,18 @@ h1{
 	right:0px;
 	top:0px;
 	bottom: 0px;
-	padding: 20px 20px;
+	padding:20px 20px;
 	overflow-y: auto;
 	border: 1px solid lightgrey;
 
+    .playlist{
+	margin-bottom:60px;
+	margin-top:0px;
+	border-top:2px solid darkgrey;
+	padding-top:15px;	
+	}
    .playlist-selection{
-	margin:15px 0px;
+	margin:48px 0px;
     }
     
     section {
@@ -178,6 +191,7 @@ h1{
     }
     .metadata{
       padding:0px 20px;
+      width:400px;
 
     }
     .next{
@@ -187,7 +201,6 @@ h1{
     }
  
     .icon {
-        background-color: white;
         color: darkgrey;
     }
     .icon:hover {
@@ -201,13 +214,52 @@ h1{
       font-weight:bold;
       clear: left;
       float: left;
-      font-size:13px;
+      font-size:11px;
       vertical-align:text-bottom;
-    }
+      line-height:20px;
+      text-transform:uppercase;
+      }
     dd{
       float:left;
     }
+    .icon-play {
+    padding:4px 4px 7px 4px;
+    width:auto;
+    position:absolute;
+
+    }
+    .icon-next {
+      padding:4px 4px 7px 40px;
+      width:auto;
+      position:absolute;
+  }
+  .icon-previous {
+      padding:4px 4px 7px 20px;
+      width:auto;
+      position:absolute;
+
+  }
+    .player {
+    position: absolute;
+    border:thin solid darkgrey;
+    width:140px;
+    height:28px;
+    margin-left:5px;
+    }
+    
+    .playerh2 {
+    position: absolute;
+    border:thin solid darkgrey;
+    width:444px;
+    height:29px;
+    margin-left:5px;
+    display:inline;
+
+    }
+     
 }
+
+
 
 #composition {
     margin-top:10px;
@@ -227,9 +279,47 @@ h1{
 
 .table-cell {
     display: table-cell;
-    padding:5px;
-    
-  
+    padding:5px;    
 }
 
+lateral-playlist{
+	width:47%;
+	position:absolute;
+	right:0px;
+	top:0px;
+	bottom: 0px;
+	padding:20px 20px;
+	overflow-y: auto;
+	border: 1px solid lightgrey;
+	
+    .playlist{
+	margin-bottom:60px;
+	margin-top:0px;
+	border-top:2px solid darkgrey;
+	padding-top:15px;	
+	} 
+	
+    .icon-play {
+    padding:4px 4px 7px 4px;
+    width:auto;
+    position:absolute;
+    }
+    
+    .icon-next {
+    padding:4px 4px 7px 40px;
+    width:auto;
+    position:absolute;
+  }
+  
+    .icon-previous {
+    padding:4px 4px 7px 20px;
+    width:auto;
+    position:absolute;
+  }
+}
+
+
+[data-timecontainer] [smil="active"] {
+	     background-color:red;
+        }
 
