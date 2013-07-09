@@ -51,6 +51,9 @@ class Sound(models.Model):
         url = 'http://localhost:8000%s' % self.get_absolute_url()
         AAResource(url).index()
 
+        url = 'http://localhost:8000%s' % self.sound.url
+        AAResource(url).index()
+
         #transcode.delay(self.sound.path)
         #ffmpeg2theora.delay(self.sound.path)
         #ffmpeg2vp8.delay(self.sound.path)

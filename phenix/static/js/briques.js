@@ -16,6 +16,7 @@ $(function() {
         composition.append($html);
     };
 
+    // Returns an array of all the query components
     var parseQuery = function(query) {
         var tree = [];
         var bricks = query.split('+');
@@ -47,6 +48,7 @@ $(function() {
         var query = $('textarea').val();
         var tree = parseQuery(query);
 
+        // Makes a sparql request for every item in the sequence
         $.each(tree, function(index, value) {
             // new query
             var q = $.sparql("/sparql/", {method: 'POST'})
@@ -108,5 +110,3 @@ aa.Brick = function(results)
     
     return Object.create(proto).init(results);
 }
-
-

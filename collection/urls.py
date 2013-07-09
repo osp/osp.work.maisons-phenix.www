@@ -14,4 +14,5 @@ urlpatterns = patterns('collection.views',
 
 urlpatterns += patterns('django.views.generic.simple',
     (r'^briques/$', 'direct_to_template', {'template': 'collection/briques.html'}),
+    (r'^briques2/$', 'direct_to_template', {'template': 'collection/briques2.html'}),
 )
