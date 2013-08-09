@@ -1,12 +1,13 @@
 ;$(function() {
 
     window.ResultModel = Backbone.Model.extend({
-        initialize: function () {
-            this.index = 0;
+        defaults: {
+            index: 0,
         },
         random: function () {
             var results = this.get("results").bindings;
             var index = Math.floor(Math.random() * results.length);
+            this.set({index: index});
             var result = results[index];
 
             return result;
@@ -28,12 +29,17 @@
     window.ResultView = Backbone.View.extend({
         tagName: 'audio',
         initialize: function() {
+            var that = this;
+            this.model.on("change:index", function(model){
+                that.render();
+            });
             this.render();
         },
         render: function() {
             var model = this.model.random();
             var src = model.resource.value;
             var length = model.length.value;
+
             return this.$el.attr({
                 'src': src,
                 'controls': '',
@@ -43,11 +49,47 @@
     });
 
 
+    window.PlaylistView = Backbone.View.extend({
+        el: '#playlist-region',
+        template: $('#playlist-tmpl').html(),
+        initialize: function() {
+            this.$el.html(this.template);
+            this.render();
+            this.collection.bind("reset", this.render.bind(this));
+            this.listenTo(this.collection, 'change:index', function() { console.log("ok"); });
+            //this.collection.bind('change:index', function(model) { console.log("blabl") });
+            window.collection = this.collection;
+        },
+        render: function() {
+            var container = this.$el.find('#playlist');
+
+            container.empty();
+
+            var timing = container.prop('timing');
+            if (timing) { timing.reset(); };
+
+            this.collection.each(function(model) {
+                var resultView = new window.ResultView({model: model})
+                container.append(resultView.$el);
+            });
+
+            var t = document.createTimeContainer(container.get(0));
+            t.show();
+
+            return this;
+        }
+    });
+
+
+
     window.OneSpectrogramView = Backbone.View.extend({
         tagName: 'div',
         template: $('#spectrogram-tmpl').html(),
         attributes: {
             'class': 'briq'
+        },
+        events: {
+            'click .icon-reload': 'render',
         },
         initialize: function() {
             this.render();
@@ -56,6 +98,7 @@
             var model = this.model.random();
             var title = model.title.value;
             var spectrogram = model.spectrogram.value;
+            this.$el.empty();
             this.$el.append(_.template(this.template, {
                 'title': title,
                 'spectrogram': spectrogram
@@ -85,36 +128,6 @@
         }
     });
 
-
-    window.PlaylistView = Backbone.View.extend({
-        el: '#playlist-region',
-        template: $('#playlist-tmpl').html(),
-        initialize: function() {
-            this.collection.bind("reset", this.render.bind(this));
-            this.render();
-        },
-        render: function() {
-            var $el = this.$el;
-
-            this.$el.attr({
-                'data-timecontainer': 'seq'
-            });
-
-            this.$el.empty();
-            var timing = this.$el.prop('timing');
-            if (timing) {
-                timing.reset();
-            };
-            this.collection.each(function(model) {
-                var resultView = new window.ResultView({model: model})
-                $el.append(resultView.$el);
-            });
-            var t = document.createTimeContainer(this.el);
-            t.show();
-
-            return this;
-        }
-    });
 
     // The view for the texarea
     window.QueryView = Backbone.View.extend({

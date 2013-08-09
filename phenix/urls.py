@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^djcelery/', include('djcelery.urls')),
     url(r'^aacore/', include('aacore.urls')),
+    url(r'^resources/', include('aawiki.urls')),
     url(r'^', include('collection.urls')),
 )
 

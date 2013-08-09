@@ -97,6 +97,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'aacore',
+    'aawiki',
+    'tastypie',
+    'backbone_tastypie',
     'collection'
 )
 
