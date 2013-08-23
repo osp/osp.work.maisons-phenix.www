@@ -199,7 +199,7 @@ section.section1 textarea {
 }
 
 section.section1 textarea:focus {
-    outline: 7px solid paleGreen;
+    outline: 1px solid paleGreen;
 }
 
 /*section.section1 .menu {*/
@@ -246,5 +246,9 @@ section.section1 textarea:focus {
 
 .selected {
     z-index: 999;
-    outline: 7px solid paleGreen !important;
+    outline: 3px solid paleGreen !important;
+}
+.editing {
+    z-index: 999;
+    outline: 3px dashed paleGreen !important;
 }

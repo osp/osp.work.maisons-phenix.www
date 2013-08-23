@@ -1,0 +1,113 @@
+@import "elements.less";
+
+/** {*/
+    /*[>font-feature-settings: "liga", "dlig", "clig", "kern";<]*/
+    /*[>-webkit-font-feature-settings: "liga", "dlig", "clig", "kern";<]*/
+    /*[>-o-font-feature-settings: "liga", "dlig", "clig", "kern";<]*/
+/*}*/
+body {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 15px;
+    margin: 23px;
+}
+
+h1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 23px;
+    padding-bottom: 23px * 3;
+    background-color: white;
+    font-size: 18px;
+    line-height: 23px;
+    .gradient(#FFF, rgba(255, 255, 255, 0), #FFF);
+}
+
+article {
+    /*padding-left: 23px * 4;*/
+    position: absolute;
+    top: 23px * 4;
+    left: 23px;
+    right: 23px;
+    /*padding-top: 23px * 4;*/
+    /*.columns(250px, 3, 50px, #EEE, solid, 1px);*/
+
+}
+
+section.section1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33.3%;
+}
+section.section1 + section.section1 {
+    left: 33.3%;
+}
+section.section1 + section.section1 + section.section1 {
+    left: 66.6%;
+}
+
+section.section1 {
+    /*outline: 1px solid blue;*/
+
+    /*break-after: column;*/
+    /*-webkit-column-break-after: always;*/
+
+    section {
+        outline: 1px solid white;
+        /*border: 1px solid red;*/
+        margin-bottom: 2px;
+        background-color: white;
+        overflow: hidden;
+        width: 100%;
+        /*color: whitesmoke;*/
+
+        div.timecodes {
+            /*display: none;*/
+            /*position: absolute;*/
+            /*left: 0;*/
+            /*text-indent: 23px * 2;*/
+        }
+
+        p {
+            display: none;
+        }
+
+        img {
+            max-width: 100%;
+            .opacity(0.5);
+            -webkit-filter: grayscale(100%);
+        }
+    }
+
+    section.active {
+        font-size: 18px;
+        line-height: 23px;
+        color: black;
+
+        img {
+            max-width: 100%;
+            .opacity(1);
+            -webkit-filter: none;
+        }
+    }
+}
+
+
+.sound {
+   background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=) repeat;
+}
+
+section {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAHklEQVQIW2NkQAX/GZH4/4FsRpgAmAOSBBFwDkgAAIKuBATRTAAZAAAAAElFTkSuQmCC) repeat;
+}
+
+section {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2P8z8Dwn5GBAYggAM7AEICpxFABALLeBAVd879LAAAAAElFTkSuQmCC) repeat;
+}

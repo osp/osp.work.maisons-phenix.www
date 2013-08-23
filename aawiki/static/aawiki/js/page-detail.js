@@ -27,6 +27,7 @@ window.AA = window.AA || {};
     }
 
     AA.selected = undefined;
+    AA.current = undefined;
 
     AA.AnnotationModel = Backbone.Model.extend({
         urlRoot: AA.routes.annotationList,
@@ -57,13 +58,81 @@ window.AA = window.AA || {};
         events : {
             //'dblclick' : 'toggle',
         },
+        onChange: function(model, options) {
+            var defaults = {
+                animate: false
+            };
+            var options = $.extend({}, defaults, options);
+
+            if (options.animate === true) {
+                this.$el.animate({
+                    left: model.changed.left,
+                    top: model.changed.top
+                }, 2000, 'easeOutExpo');
+            };
+        },
         initialize: function() {
+            var that = this;
+
             this.listenTo(this.model, 'destroy', this.remove);
+            this.listenTo(this.model, 'change', this.onChange);
 
             marked.setOptions({
                 timecode: true,
                 semanticdata: 'aa',
             });
+
+            this.$el
+            .on('click', function(event) {
+                //event.stopImmediatePropagation();
+                if (AA.selected) {
+                    $(AA.selected).removeClass('selected');
+                };
+                AA.selected = this;
+                $(this).addClass('selected');
+            })
+            .contextual({
+                iconSize: 40,
+                iconSpacing: 5,
+                onShow: function() {
+                    if (AA.current && AA.current !== this) {
+                        AA.current.hide();
+                    };
+
+                    AA.current = this;
+                }
+            });
+
+            var btn = $('<div>')
+            .attr({
+                title: 'edit annotation',
+                draggable: false,
+                class: 'icon icon7'
+            })
+            .on('click', function(event) {
+                //that.$el.contextual('hide');
+                that.toggle();
+                return false;
+            });
+
+            this.$el.contextual('register', 'click', 'left', btn);
+
+            var btn = $('<div>')
+            .attr({
+                title: 'delete annotation',
+                draggable: false,
+                class: 'icon icon6'
+            })
+            .on('click', function(event) {
+                if (window.confirm('This will permanently delete this annotation. Proceed?')) {
+                    that.$el.contextual('hide');
+                    that.model.destroy();
+                };
+                return false;
+            });
+
+            this.$el.contextual('register', 'click', 'top', btn);
+
 
             this.render();
         },
@@ -79,6 +148,7 @@ window.AA = window.AA || {};
 
                 this.$el
                 .empty()
+                .addClass('editing')
                 .append($textarea);
             } else {
                 var model = this.model;
@@ -86,6 +156,8 @@ window.AA = window.AA || {};
                 var that = this;
 
                 this.$el
+                .empty()
+                .removeClass('editing')
                 .html(this.templates.view({body: body}))
                 .addClass('section1')
                 .css({
@@ -151,38 +223,48 @@ window.AA = window.AA || {};
                         }).save();
                     }
                 })
-                .on('click', function(event) {
-                    //event.stopImmediatePropagation();
-                    if (AA.selected) {
-                        $(AA.selected).removeClass('selected');
-                    };
-                    AA.selected = this;
-                    $(this).addClass('selected');
-                })
-                .contextual({
-                    iconSize: 40,
-                    iconSpacing: 5
-                })
                 .find("section").each(function() {
                     var $this = $(this),
                         begin = $(this).data('begin'),
                         end = $(this).data('end');
-                    
-                    var beginElt = $('<time>')
-                    .attr('property', 'aa:begin')
-                    .html(begin.secondsTo("hh:mm:ss.ms"));
+
+                    //var tmpl = ''
+                    //+ '<a href="#t=<%= timecode %>">'
+                    //+ '<time property="<%= property %>"><%= timecode %></time>
+                    //+ '</a>';
+
+                    //var compiled = 
+
+                    var beginAElt = $('<a>')
+                    .attr('href', '#t=' + begin)
+                    .on('click', function(event) {
+                        event.stopPropagation();
+                    })
+                    .append(
+                        $('<time>')
+                        .attr('property', 'aa:begin')
+                        .html(begin.secondsTo("hh:mm:ss.ms"))
+                    );
 
                     var wrapperElt = $('<div>')
                     .addClass('timecodes')
-                    .append(beginElt);
+                    .append(beginAElt);
 
                     if (end) {
-                        var endElt = $('<time>')
+                        var endAElt = $('<a>')
+                        .attr('href', '#t=' + end)
+                        .on('click', function(event) {
+                            event.stopPropagation();
+                        });
+
+                        var endTimeElt = $('<time>')
                         .attr('property', 'aa:end')
                         .html(end.secondsTo("hh:mm:ss.ms"));
 
+                        endAElt.append(endTimeElt);
+
                         wrapperElt
-                        .append(endElt);
+                        .append(endAElt);
                     };
 
 
@@ -195,36 +277,6 @@ window.AA = window.AA || {};
                     });
                 });
 
-                var btn = $('<div>')
-                .attr({
-                    title: 'edit annotation',
-                    draggable: false,
-                    class: 'icon icon1'
-                })
-                .on('click', function(event) {
-                    that.toggle();
-                    return false;
-                });
-
-                this.$el.contextual('register', 'click', 'left', btn);
-
-                var btn = $('<div>')
-                .attr({
-                    title: 'delete annotation',
-                    draggable: false,
-                    class: 'icon icon2'
-
-                })
-                .on('click', function(event) {
-                    if (window.confirm('This will permanently delete this annotation. Proceed?')) {
-                        that.$el.contextual('hide');
-                        that.model.destroy();
-                    };
-                    return false;
-                });
-
-                this.$el.contextual('register', 'click', 'top', btn);
-
                 var wrapper = this.$el.find('div.wrapper');
                 wrapper.autoscrollable();
 
@@ -234,7 +286,7 @@ window.AA = window.AA || {};
         },
 
         toggle: function() {
-            this.$el.contextual('hide');
+            //this.$el.contextual('hide');
 
             if (this.editing) {
                 this.model.set({
@@ -255,59 +307,106 @@ window.AA = window.AA || {};
             var that = this;
 
             this.$el
+            .on('click', function(event) {
+                if (AA.selected) {
+                    $(AA.selected).removeClass('selected');
+                    AA.selected = undefined;
+
+                    event.stopImmediatePropagation();
+                };
+            })
             .contextual({
                 iconSize: 40,
-                iconSpacing: 5
+                iconSpacing: 5,
+                onShow: function() {
+                    if (AA.current && AA.current !== this) {
+                        AA.current.hide();
+                    };
+
+                    AA.current = this;
+                }
             });
 
+            (function createBtnNewAnnotation() {
+                var btn = $('<div>')
+                .attr({
+                    title: 'new annotation',
+                    draggable: false,
+                    class: 'icon icon5'
 
-            var btn = $('<div>')
-            .attr({
-                title: 'new annotation',
-                draggable: false,
-                class: 'icon icon5'
+                })
+                .on('click', function(event) {
+                    var offsetBtn = $(event.currentTarget).position();
+                    var offsetCanvas = that.$el.position();
+                    var top = offsetBtn.top - offsetCanvas.top;
+                    var left = offsetBtn.left - offsetCanvas.left;
+                    that.collection.create({top: top, left: left});
+                    that.$el.contextual('hide');
 
-            })
-            .on('click', function(event) {
-                var offsetBtn = $(event.currentTarget).position();
-                var offsetCanvas = that.$el.position();
-                var top = offsetBtn.top - offsetCanvas.top;
-                var left = offsetBtn.left - offsetCanvas.left;
-                that.collection.create({top: top, left: left});
-                that.$el.contextual('hide');
+                    return false;
+                });
 
-                return false;
-            });
+                that.$el.contextual('register', 'click', 'cursor', btn);
+            })();
 
-            this.$el.contextual('register', 'click', 'click', btn);
+            (function createBtnTogglegrid() {
+                var btn2 = $('<div>')
+                .attr({
+                    title: 'toggle grid',
+                    draggable: false,
+                    class: 'icon icon2'
 
-            var btn2 = $('<div>')
-            .attr({
-                title: 'toggle grid',
-                draggable: false,
-                class: 'icon icon2'
+                })
+                .on('click', function(event) {
+                    return false;
+                });
 
-            })
-            .on('click', function(event) {
-                return false;
-            });
+                that.$el.contextual('register', 'click', 'cursor', btn2);
+            })();
 
-            this.$el.contextual('register', 'click', 'click', btn2);
+            (function createBtnChangeGrid() {
+                var btn3 = $('<div>')
+                .attr({
+                    title: 'change grid',
+                    draggable: false,
+                    class: 'icon icon3'
 
-            var btn3 = $('<div>')
-            .attr({
-                title: 'change grid',
-                draggable: false,
-                class: 'icon icon3'
+                })
+                .on('click', function(event) {
+                    return false;
+                });
 
-            })
-            .on('click', function(event) {
-                return false;
-            });
+                that.$el.contextual('register', 'click', 'cursor', btn3);
+            })();
 
-            this.$el.contextual('register', 'click', 'click', btn3);
+            (function createBtnOrganize() {
+                var btn3 = $('<div>')
+                .attr({
+                    title: 'organize annotation',
+                    draggable: false,
+                    class: 'icon icon1'
+
+                })
+                .on('click', function(event) {
+                    that.collection.each(function(model, index) {
+                        model.set({
+                            'left': 20 + (index * 20),
+                            'top': 20 + (index * 20),
+                        }, {animate: true}).save();
+                    });
+
+                    return false;
+                });
+
+                that.$el.contextual('register', 'click', 'cursor', btn3);
+            })();
 
             this.collection.fetch({
+                data : {
+                    // filters the annotation list for the current Resource at
+                    // the API level
+                    "resource" : AA.routes.resourceId                  
+                },
                 success: function(result) {
                     that.render();
                 }
@@ -333,31 +432,52 @@ window.AA = window.AA || {};
             return this;
         }
     });
+
+
+    AA.Router = Backbone.Router.extend({
+        routes: {
+            "t=:time": "timechange"
+        }
+    });
 })();
 
 
 $(function() {
     AA.annotationCollectionView = new AA.AnnotationCollectionView();
 
+    AA.router = new AA.Router();
+
     var mediaElt = $('#resource').get(0);
 
-    $(document).bind('keydown', "Ctrl+Shift+up", function toggle() {
-        if (mediaElt.paused === false) {
-            mediaElt.pause();
-        } else {
-            mediaElt.play();
-        }
-        return false;
-    });
+    $('#resource').on('canplaythrough', function(event) {
+        AA.router.on('route:timechange', function(time) {
+            mediaElt.currentTime = parseFloat(time);
+        })
 
-    $(document).bind('keydown', "Ctrl+Shift+left", function rewind() {
-        mediaElt.currentTime = mediaElt.currentTime - 5;
-        return false;
-    });
+        // Start Backbone history a necessary step for bookmarkable URL's
+        Backbone.history.start();
 
-    $(document).bind('keydown', "Ctrl+Shift+right", function fastForward() {
-        mediaElt.currentTime = mediaElt.currentTime + 5;
-        return false;
+        $(document).bind('keydown', "Ctrl+Shift+up", function toggle() {
+            if (mediaElt.paused === false) {
+                mediaElt.pause();
+                AA.router.navigate('t=' + mediaElt.currentTime + 's', {trigger: false, replace: true})
+            } else {
+                mediaElt.play();
+            }
+            return false;
+        });
+
+        $(document).bind('keydown', "Ctrl+Shift+left", function rewind() {
+            mediaElt.currentTime = mediaElt.currentTime - 5;
+            AA.router.navigate('t=' + mediaElt.currentTime + 's', {trigger: false, replace: true})
+            return false;
+        });
+
+        $(document).bind('keydown', "Ctrl+Shift+right", function fastForward() {
+            mediaElt.currentTime = mediaElt.currentTime + 5;
+            AA.router.navigate('t=' + mediaElt.currentTime + 's', {trigger: false, replace: true})
+            return false;
+        });
     });
 });
 

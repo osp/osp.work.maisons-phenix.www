@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -15,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^djcelery/', include('djcelery.urls')),
     url(r'^aacore/', include('aacore.urls')),
     url(r'^resources/', include('aawiki.urls')),
+    url(r'^timeline/$', TemplateView.as_view(template_name='timeline.html'),  name='timeline'),
     url(r'^', include('collection.urls')),
 )
 

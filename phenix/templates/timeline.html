@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Les maisons Phénix</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/css/reset.css" media="screen"/>
+    <link href="{{ STATIC_URL }}less/timeline.less" type="text/css" rel="stylesheet/less">
+</head>
+
+<body>
+    <h1>Les maisons Phénix</h1>
+    <article>
+        <section class="section1">
+            <div class="wrapper" data-timecontainer="par">
+                <section data-begin="08:35" data-end="09:20">
+                    <div class="timecodes"><time>08’35</time></div>
+                    <p>bruit de chaussures plus fort on se pose sur un banc ?
+                    marche dans les graviers // voitures qui passent </p>
+                </section>
+
+                <section data-begin="09:20" data-end="09:35">
+                    <div class="timecodes"><time>09’20</time></div>
+                    <p>choc du micro</p>
+                </section>
+
+                <section data-begin="09:35" data-end="10:00" class="active">
+                    <div class="timecodes"><time>09’35</time></div>
+                    <p>c’est pas que je n’ai pas de souvenir, c’est que c’est
+                    difficile d’avoir des souvenirs ici</p>
+                </section>
+
+                <section data-begin="10:00" data-end="10:15">
+                    <div class="timecodes"><time>10’00</time></div>
+                    <p>le centre aéré, l’école</p>
+                </section>
+                <section data-begin="10:15" data-end="10:45">
+                    <div class="timecodes"><time>10’15</time></div>
+                    <p>pas vivre ici, pourquoi ? jeunes chez leurs parents.</p>
+                </section>
+
+                <section data-begin="10:45" data-end="13:25">
+                    <div class="timecodes"><time>10’45</time></div>
+                    <p>c’est beaucoup plus compliqué.</p>
+                </section>
+
+                <section data-begin="13:25" data-end="13:56">
+                    <div class="timecodes"><time>13’25</time></div>
+                    <p>non comme ça j’ai pas de grand souvenir marquant qui
+                    viennent d’ici ou qui sont d’ici
+                    merde, ça va pas m’aider
+                    désolé
+                    </p>
+                </section>
+
+                <section data-begin="13:56" data-end="19:00">
+                    <div class="timecodes"><time>13’56</time></div>
+                    <p>j’essaye de chercher mais je trouve pas comme ça.  ou alors
+                    c’est des trucs vraiment très personnel.  silence, juste les
+                    voitures en repartir encore moins c’est un lieu pour venir y
+                    dormir, ou avec une voiture </p>
+                </section>
+
+                <section data-begin="19:00" data-end="19:45">
+                    <div class="timecodes"><time>19’00</time></div>
+                    <p>forcément en allant vers les centres commerciaux tu devrais
+                    trouver plus de monde, mais c’est pas un lieu, vraiment</p>
+                </section>
+
+                <section data-begin="19:45" data-end="20:00">
+                    <div class="timecodes"><time>19’45</time></div>
+                    <p> j’en n’ai pas vraiment de souvenir, je me suis très vite fais
+                    chier</p>
+                </section>
+
+                <section data-begin="20:00" data-end="20:40">
+                    <div class="timecodes"><time>20’00</time></div>
+                    <p>c’était pas du tout mon truc, je m’en suis rendue compte
+                    extrêmement vite comme quand je suis allée à l’église</p>
+                </section>
+
+                <section data-begin="20:40" data-end="21:00">
+                    <div class="timecodes"><time>20’40</time></div>
+                    <p>j’y étais allé avec la sœur de Clovis</p>
+                </section>
+            </div>
+        </section>
+        <section class="section1">
+            <div class="wrapper" data-timecontainer="par">
+                <section data-begin="08:35" data-end="08:45" class="active image">
+                    <div class="timecodes"><time>08’35</time></div>
+                    <p>
+                    <img src="{{MEDIA_URL }}VAD/093VAD.jpg" />
+                    </p>
+                </section>
+                <section data-begin="08:45" data-end="08:55">
+                    <div class="timecodes"><time>08’35</time></div>
+                    <p>
+                    <img src="{{ MEDIA_URL }}VAD/136VAD.jpg" />
+                    </p>
+                </section>
+            </div>
+        </section>
+        <section class="section1">
+            <div class="wrapper" data-timecontainer="par">
+                <!-- fragment allant de 10 secons à 260 seconds du fichier son
+                20120401_T_BN.oga; joué dans la composition à partir de 00:00
+                -->
+                <section data-begin="00:00" data-end="04:10" class="sound">
+                    <div class="timecodes"><time>00’00</time></div>
+                    <p><audio src="http://phenix.stdin.fr/media/sound/20120401_T_BN.oga#t=10,260"></audio></p>
+                </section>
+            </div>
+        </section>
+    </article>
+    <script src="{{ STATIC_URL }}lib/js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/less-1.3.0.min.js"></script>
+    <script src="{{ STATIC_URL }}js/timecode.js"></script>
+    <script>
+    $(function() {
+        $('section[data-begin]').each(function(index) {
+            var start = $(this).attr('data-begin').toSeconds();
+            var end = $(this).attr('data-end').toSeconds();
+            $(this).css({
+                height: end - start
+            });
+        });
+    });
+    </script>
+    <script>
+    $(function() {
+        jQuery.fn.reverse = [].reverse;
+        $('section[data-begin]').reverse().each(function(index) {
+            var seconds = $(this).attr('data-begin').toSeconds();
+            $(this).css({
+                position: 'absolute',
+                top: seconds,
+                'z-index': index
+            });
+        });
+    });
+    </script>
+</body>
+</html>

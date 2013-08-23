@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block body %}
-<audio id="resource" src="{{ object.url }}" controls></audio>
+<audio id="resource" src="{{ object.url }}" controls autoplay></audio>
 <div id="canvas"></div>
 {% endblock %}
 
@@ -36,7 +36,8 @@ window.AA = window.AA || {};
 AA.routes = {
     annotationList: '{{ annotationList }}',
     resourceList: '{{ resourceList }}',
-    resourceDetail: '{{ resourceDetail }}' 
+    resourceDetail: '{{ resourceDetail }}',
+    resourceId: {{ object.pk }}
 };
 </script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
