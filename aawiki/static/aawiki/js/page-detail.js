@@ -133,6 +133,20 @@ window.AA = window.AA || {};
 
             this.$el.contextual('register', 'click', 'top', btn);
 
+            var btn = $('<div>')
+            .attr({
+                title: 'export annotation to audacity markers',
+                draggable: false,
+                class: 'icon icon8'
+            })
+            .on('click', function(event) {
+                window.open(that.model.id + '?format=audacity');
+
+                return false;
+            });
+
+            this.$el.contextual('register', 'click', 'top', btn);
+
 
             this.render();
         },
