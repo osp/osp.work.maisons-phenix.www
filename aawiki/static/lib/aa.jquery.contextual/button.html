@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>aa.jquery.contextual</title>
+    <link rel="stylesheet" href="aa.jquery.contextual.css" media="screen"/>
+    <link rel="stylesheet" href="demo.css" media="screen"/>
+</head>
+
+<body>
+    <div id="canvas">
+        <div id="color" style="width: 30px; height: 30px; background-color: black;"></div>
+        <div id="value">0</div>
+        <div class="icon icon1" title="Hello, World!" style="position: absolute; left: 546px; top: 147px;"></div>
+        <div class="icon icon2" title="Hello, World!" style="position: absolute; left: 646px; top: 147px;"></div>
+    </div>
+
+    <script src="lib/jquery-1.9.1.min.js"></script>
+    <!--<script src="aa.jquery.contextual.js"></script>-->
+    <!--<script src="demo.js"></script>-->
+
+    <script>
+    $(function() {
+        var values = [
+            "News Cycle",
+            "Not Courier Sans",
+        ];
+        var i = -1;
+        $('.icon1').on('click', function(event) {
+            $('#value').text(values[++i % values.length]);
+        });
+    });
+
+    $(function() {
+        $('.icon2').on('mousedown', function(event) {
+            var initial = event.clientX;
+            $('body').on('mousemove', function(event) {
+                $('#value').text(event.clientX - initial);
+            });
+            $('body').on('mouseup', function(event) {
+                $('body').off('mousemove');
+            });
+        });
+    });
+    </script>
+</body>
+</html>
