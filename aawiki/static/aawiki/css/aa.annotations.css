@@ -163,6 +163,10 @@ section.section1 > div.wrapper > section {
 
 
 /* timecodes {{{ */
+.timecodes a {
+    text-decoration: none;
+}
+
 time[property="aa:begin"],
 time[property="aa:end"] {
     color: gray;

@@ -13,7 +13,18 @@
 </head>
 
 <body>
-{% block body %}{% endblock %}
+{% block body %}
+<div class="table">
+    <div class="table-row">
+        <div class="table-cell">
+            <input type="text" name="url">
+        </div>
+        <div class="table-cell">
+            <input type="submit" name="send">
+        </div>
+    </div>
+</div>
+{% endblock %}
 {% block js %}{% endblock %}
 </body>
 </html>

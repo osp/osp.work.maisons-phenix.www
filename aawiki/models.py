@@ -10,7 +10,7 @@ class Resource(models.Model):
         return self.url
     
     def get_absolute_url(self):
-        return reverse('resource-detail', kwargs={'slug': self.slug})
+        return reverse('resource-detail', kwargs={'pk': self.pk})
 
 
 class Annotation(models.Model):

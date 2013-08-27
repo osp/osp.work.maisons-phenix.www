@@ -1,0 +1,14 @@
+{% extends "aawiki/base.html" %}
+
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}aawiki/css/aa.wiki.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}aawiki/css/aa.annotations.css">
+{% endblock %}
+
+{% block body %}
+Congratulations!
+
+<button onclick="window.parent.location.reload()">close</button>
+{% endblock %}

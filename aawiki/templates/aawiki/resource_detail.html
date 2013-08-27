@@ -20,6 +20,7 @@
 {% endblock %}
 
 {% block body %}
+{{ block.super }}
 <audio id="resource" src="{{ object.url }}" controls autoplay></audio>
 <div id="canvas"></div>
 {% endblock %}

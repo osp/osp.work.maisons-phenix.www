@@ -24,9 +24,70 @@ body {
 #canvas {
     position: fixed;
     outline: 1px solid grey;
-    top: 100px;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     overflow: auto;
 }
+
+.table {
+    width: 100%;
+    display: table;
+}
+
+.table-row {
+    display: table-row;
+    border-collapse: separate;
+    border-spacing: 20px 0;
+    border: 1px solid grey;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+.table-row {
+    input {
+       width: 100%; 
+    }
+}
+
+.table {
+  display: table;
+  border-spacing: 2px;
+  border-collapse: separate;
+  margin-top: 0;
+  margin-bottom: 0;
+  /* XXXldb do we want this if we're border-collapse:collapse ? */
+  -moz-box-sizing: border-box;
+  text-indent: 0;
+  /*border: 1px solid red;*/
+}
+
+.table-row {
+    width: 100%;
+}
+
+.table-cell { 
+  display: table-cell;
+  vertical-align: inherit;
+  text-align: inherit; 
+  padding: 1px;
+  /*border: 1px solid red;*/
+  box-sizing: border-box;
+}
+
+.table-cell + .table-cell { 
+    width: 100px;
+}
+
+.table-cell > * { 
+    width: 100%;
+}
+
+.table-cell input {
+    box-sizing: border-box;
+    border: 1px solid lightgrey;
+}
+

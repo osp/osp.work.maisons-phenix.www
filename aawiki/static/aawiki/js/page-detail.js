@@ -91,6 +91,42 @@ window.AA = window.AA || {};
                 AA.selected = this;
                 $(this).addClass('selected');
             })
+            //.on('dragover', function(event) {
+                //event.preventDefault();
+                //event.stopPropagation();
+                //console.log('dropped');
+            //})
+            //.on('dragenter', function(event) {
+                //event.preventDefault();
+                //event.stopPropagation();
+                //console.log('dropped');
+            //})
+            //.on('drop', function(event) {
+                //if(event.originalEvent.dataTransfer){
+                    //if(event.originalEvent.dataTransfer.files.length) {
+                        //event.preventDefault();
+                        //event.stopPropagation();
+
+                        //var files = event.originalEvent.dataTransfer.files;
+
+                        //for (var i = 0; i < files.length; i++) {
+                            //var file = files[i];
+
+                            //if (file.type.indexOf("text") == 0) {
+                                //var reader = new FileReader();
+
+                                //reader.onload = function(event) {
+                                    //// get file content
+                                    //var text = event.target.result;
+                                    //console.log(text);
+                                //}
+                                //reader.readAsText(file);
+                            //}
+                        //};
+                    //}   
+                //}
+                //console.log('dropped');
+            //})
             .contextual({
                 iconSize: 40,
                 iconSpacing: 5,
@@ -142,6 +178,20 @@ window.AA = window.AA || {};
             .on('click', function(event) {
                 window.open(that.model.id + '?format=audacity');
 
+                return false;
+            });
+
+            this.$el.contextual('register', 'click', 'top', btn);
+
+            var btn = $('<div>')
+            .attr({
+                title: 'import annotation from audacity markers',
+                draggable: false,
+                class: 'icon icon8'
+            })
+            .on('click', function(event) {
+                window.open('/annotations/' + that.model.get('id') + '/update/', '', "status=yes, height=500; width=500; resizeable=0");
+                
                 return false;
             });
 

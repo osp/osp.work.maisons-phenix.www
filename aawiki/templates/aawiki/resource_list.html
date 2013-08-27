@@ -1,0 +1,19 @@
+{% extends "aawiki/base.html" %}
+
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}aawiki/css/aa.wiki.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}aawiki/css/aa.annotations.css">
+{% endblock %}
+
+
+{% block body %}
+{{ block.super }}
+<ul>
+{% for object in object_list %}
+    <li><a href="{{ object.get_absolute_url }}">{{ object.url }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
+

@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^djcelery/', include('djcelery.urls')),
     url(r'^aacore/', include('aacore.urls')),
-    url(r'^resources/', include('aawiki.urls')),
+    url(r'^', include('aawiki.urls')),
     url(r'^timeline/$', TemplateView.as_view(template_name='timeline.html'),  name='timeline'),
     url(r'^', include('collection.urls')),
 )

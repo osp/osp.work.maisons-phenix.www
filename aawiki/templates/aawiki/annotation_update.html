@@ -1,0 +1,15 @@
+{% extends "aawiki/base.html" %}
+
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}aawiki/css/aa.wiki.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}aawiki/css/aa.annotations.css">
+{% endblock %}
+
+{% block body %}
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update" />
+</form>
+{% endblock %}
