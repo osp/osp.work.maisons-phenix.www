@@ -19,7 +19,9 @@ urlpatterns = patterns('',
     url(r'^timeline/$', TemplateView.as_view(template_name='timeline.html'),  name='timeline'),
     url(r'^layers/$', TemplateView.as_view(template_name='layers.html'),  name='layers'),
     url(r'^nomenclature/$', TemplateView.as_view(template_name='nomenclature.html'),  name='nomenclature'),
+    url(r'^cartouche/$', TemplateView.as_view(template_name='cartouche.html'),  name='cartouche'),
     url(r'^', include('collection.urls')),
+
 )
 
 if settings.DEBUG:
