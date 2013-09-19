@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^aacore/', include('aacore.urls')),
     url(r'^', include('aawiki.urls')),
     url(r'^timeline/$', TemplateView.as_view(template_name='timeline.html'),  name='timeline'),
+    url(r'^layers/$', TemplateView.as_view(template_name='layers.html'),  name='layers'),
+    url(r'^nomenclature/$', TemplateView.as_view(template_name='nomenclature.html'),  name='nomenclature'),
     url(r'^', include('collection.urls')),
 )
 

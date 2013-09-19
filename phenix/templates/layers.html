@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title> timesheets.js</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        [data-timecontainer] {
+        }
+        [data-timecontainer] [smil] {
+            position: absolute;
+            transition-property: top;
+            transition-timing-function: linear;
+        }
+        [data-timecontainer] [smil="idle"] {
+            position: absolute;
+            top: 95%;
+        }
+        [data-timecontainer] [smil="active"],
+        [data-timecontainer] [smil="done"] {
+            top: -5%;
+        }
+    </style>
+</head>
+<body>
+    <div id="slider"></div>
+    <div id="currentTime"></div>
+    <div id="controls">
+        <span id="play">play</span>
+        <span id="pause">pause</span>
+    </div>
+
+    <div id="playlist" data-timecontainer="par">
+        <!--<img data-begin="0s" data-end="10s" src="http://osp.constantvzw.org/api/osp.work.maisons-phenix/dfe4b7048bc5ae37c1a2c0bb104ec2caac4cf1a3/blob-data/scan61.png"/>-->
+        <img data-begin="0s" data-end="130s" src="img/pattern.png"/> 
+        <img data-begin="10s" data-end="120s" src="img/pattern2.png" height="463"/> 
+        <img data-begin="15s" data-end="22s" src="img/ray.png"/> 
+        <img data-begin="5s" data-end="12s" src="img/rochers.png" style="left: 55%"/> 
+        <!--<img data-begin="6s" data-end="20s" src="http://osp.constantvzw.org/api/osp.work.maisons-phenix/82d1b10a673c00c9f0c28223de4e22dac6899b78/blob-data/ray-01.png"/> -->
+        <img data-begin="3s" data-end="7s" src="http://osp.constantvzw.org/api/osp.work.maisons-phenix/b0e841abbca5d5baea257cbb1dea4dd11281869c/blob-data/points-04.png" style="left: 300px;"/>
+        <img data-begin="10s" data-end="13s" src="http://osp.constantvzw.org/api/osp.work.maisons-phenix/b0e841abbca5d5baea257cbb1dea4dd11281869c/blob-data/points-04.png" style="left: 200px;"/>
+        <img data-begin="13s" data-end="27s" src="http://osp.constantvzw.org/api/osp.work.maisons-phenix/b0e841abbca5d5baea257cbb1dea4dd11281869c/blob-data/points-04.png" style="left: 400px;"/>
+    </div>
+
+	<script src="../lib/jquery-2.0.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src="../lib/timecode.js"></script>
+	<script src="../src/smil.js"></script>
+	<script src="06.foo.js"></script>
+</body>
+</html>
