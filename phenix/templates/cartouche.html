@@ -9,67 +9,60 @@
 </head>
 <body>
 
-    
-<table border="0">
+<header>
+    <hgroup>
+        <h1>Les maisons Phenix</h1>
+        <h2>renaissent toujours de leurs cendres</h2>
+    </hgroup>
 
-	  <tr>
-	    <th class="col1">piste 1</th>
-	    <th colspan="4"> <h1>Maisons Phenix: nomenclature</h1></th>
-	  <tr>
+    <nav>
+        <ul>
+            <li>mondes</li>
+            <li>sons</li>
+            <li>traversées</li>
+            <li>images</li>
+            <li>crédits</li>
+        </ul>
+    </nav>
+</header>
 	  
-	  <tr>
-            <th class="col1">N<sup>o</sup></th>
-            <th class="col2">sounds</th>
-            <th class="col3">photos</th>
-	  </tr>
-	  
-	  <tr>
+<table>
+    <colgroup>
+        <col id="col-symbols">
+        <col id="col-partition">
+        <col id="col-media">
+    </colgroup>
+    <thead>
+      <tr>
+            <th class="col1">Légende</th>
+            <th class="col2">Partition</th>
+            <th class="col3">Médias</th>
+      </tr>
+  </thead>
+      
+  <tbody>
+      <tr>
             <td rowspan="3">
-	      <div class="legende">
-	      001<br>
-	      <img class="vignettes" src="{{ STATIC_URL }}img/rice.png" />
-	      <p>connection1</p>
-	      <p>connection2</p>
-	      <p>connection1</p>
-	      </div>
-	      <div class="legende">
-	      002<br>
-	      <img class="vignettes" src="{{ STATIC_URL }}img/rice.png" />
-	      <p>connection1</p>
-	      <p>connection2</p>
-	      <p>connection1</p>
-	      </div>
-	      <div class="legende">
-	      003<br>
-	      <img class="vignettes" src="{{ STATIC_URL }}img/rice.png" />
-	      <p>connection1</p>
-	      <p>connection2</p>
-	      <p>connection1</p>
-	      </div>
-	      <div class="legende">
-	      004<br>
-	      <img class="vignettes" src="{{ STATIC_URL }}img/rice.png" />
-	      <p>connection1</p>
-	      <p>connection2</p>
-	      <p>connection1</p>
-	      </div>
-	    </td>
-	    <td rowspan="3">
-		<img src="{{ STATIC_URL }}img/rice.png" />
-		<img src="{{ STATIC_URL }}img/plantes_aquatiques.png" />
-	    </td>
-	    <td >some pictures</td>
-	  </tr>
-	  <tr>
-	    <th class="col3">
-	      <div class="legende">
-		text
-	      </div>
-	    </th>
-	    </tr>
-	    <tr>
-	    <td >some text</td>
-	  </tr>
+                <div class="symbol rocks3"></div>
+                <ul class="connexions">
+                    <li>⌤</li>
+                    <li>⌆</li>
+                    <li>⍎</li>
+                </ul>
+                <div class="symbol sand2"></div>
+                <div class="symbol test2"></div>
+                <div class="symbol arbres2"></div>
+                <div class="symbol rice3"></div>
+        </td>
+        <td rowspan="3" class="rocks3" id="partition">
+        </td>
+        <td >some pictures</td>
+      </tr>
+      <tr>
+        <tr>
+        <td >some text</td>
+      </tr>
+      </tbody>
 
 </table>
 

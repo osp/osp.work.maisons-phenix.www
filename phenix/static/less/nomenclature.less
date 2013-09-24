@@ -1,52 +1,78 @@
-@keyframes animatedBackground {
-	from { background-position: 0 0; }
-	to { background-position: 0 999%; }
+.no-padding {
+    padding: 0!important;
 }
-@-webkit-keyframes animatedBackground {
-	from { background-position: 0 0; }
-	to { background-position: 0 999%; }
-}
-td	{ 
-	animation: animatedBackground 20s linear infinite;
-}
-.rocks3 {
-    background-image: url('/static/img/rocks3.png')!important;
-    background-repeat: repeat;
-}
-.sand2 {
-    background-image: url('/static/img/sand2.png')!important;
-    background-repeat: repeat;
-}
+
+
+/* Background textures */
 .arbres2 {
     background-image: url('/static/img/arbres2.png')!important;
-    background-repeat: repeat;
 }
-.test2 {
-    background-image: url('/static/img/test2.png')!important;
-    background-repeat: repeat;
-}
-.test {
-    background-image: url('/static/img/test.png')!important;
-    background-repeat: repeat;
-}
-.rocks2 {
-    background-image: url('/static/img/rocks2.png')!important;
-    background-repeat: repeat;
+.rice3 {
+    background-image: url('/static/img/rice-3.png')!important;
 }
 .rocks {
     background-image: url('/static/img/rocks.png')!important;
-    background-repeat: repeat;
+}
+.rocks2 {
+    background-image: url('/static/img/rocks2.png')!important;
+}
+.rocks3 {
+    background-image: url('/static/img/rocks3.png')!important;
 }
 .sand {
     background-image: url('/static/img/sand.png')!important;
-    background-repeat: repeat;
+}
+.sand2 {
+    background-image: url('/static/img/sand2.png')!important;
+}
+.sand3 {
+    background-image: url('/static/img/sand3.png')!important;
+}
+.test {
+    background-image: url('/static/img/test.png')!important;
+}
+.test2 {
+    background-image: url('/static/img/test2.png')!important;
+}
+
+/* keyframes */
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 0 999px; }
+}
+
+@-webkit-keyframes clip {
+  0% {
+    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
+  }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+  }
+}
+@-webkit-keyframes maskPosition {
+	from { -webkit-mask-position: 0 0; }
+	to { -webkit-mask-position: 0 999px; }
+}
+
+/*General styles */
+h1 {
+    font-size: 26px;
+    line-height: 36px;
+    letter-spacing: 1px;
+    margin-bottom: 36px;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
 }
 body {
     font-size: 13px;
     line-height: 18px;
     margin: 26px;
     font-family: Oswald;
-    /*background-image: url(/static/img/rice.png);*/
 }
 
 sup {
@@ -70,26 +96,26 @@ table {
     }
 
     td {
-        /*color: red;*/
         border: 1px solid black;
-        /*border-right: 1px solid black;*/
-        /*border-left: 1px solid black;*/
         height: 300px;
+        /*-webkit-mask-clip: padding;*/
+        -webkit-mask-image: url('/static/img/mask2.png');
+        -webkit-mask-repeat: repeat-y;
+        -webkit-animation: animatedBackground 20s linear infinite, maskPosition 20s linear infinite;
+
+        .layer {
+            width: 100%;
+            height: 100%;
+            /*-webkit-animation: clip 20s linear infinite;*/
+            -webkit-mask-image: url('/static/img/mask.png');
+            -webkit-mask-repeat: repeat-y;
+            -webkit-animation: maskPosition 40s linear infinite, animatedBackground 40s linear infinite;
+        }
+        img {
+            /*-webkit-animation: clip 20s linear infinite;*/
+            -webkit-mask-image: url('/static/img/mask.png');
+            -webkit-mask-repeat: repeat-y;
+            -webkit-animation: maskPosition 10s linear infinite;
+        }
     }
-}
-
-h1 {
-    font-size: 26px;
-    /*text-align: center;*/
-    line-height: 36px;
-    letter-spacing: 1px;
-    margin-bottom: 36px;
-}
-
-h2 {
-    font-size: 18px;
-    /*text-align: center;*/
-    line-height: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 22px;
 }
