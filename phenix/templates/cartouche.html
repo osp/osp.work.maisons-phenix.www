@@ -8,64 +8,122 @@
     <link href="{{ STATIC_URL }}less/cartouche.less" type="text/css" rel="stylesheet/less">
 </head>
 <body>
+    <header>
+        <hgroup>
+            <h1>Les maisons Phenix</h1>
+            <h2>renaissent toujours de leurs cendres</h2>
+        </hgroup>
 
-<header>
-    <hgroup>
-        <h1>Les maisons Phenix</h1>
-        <h2>renaissent toujours de leurs cendres</h2>
-    </hgroup>
+        <nav>
+            <ul>
+                <li>mondes</li>
+                <li>sons</li>
+                <li>traversées</li>
+                <li>images</li>
+                <li>crédits</li>
+            </ul>
+        </nav>
+    </header>
+          
+    <section id="main">
+        <div id="slider"></div>
+        <table>
+            <colgroup>
+                <!--<col id="col-slider">-->
+                <col id="col-symbols">
+                <col id="col-partition">
+                <col id="col-media">
+            </colgroup>
+            <thead>
+                <tr>
+                    <!--<th></th>-->
+                    <th>Légende</th>
+                    <th>Partition</th>
+                    <th>Médias</th>
+                </tr>
+            </thead>
+              
+            <tbody>
+                <tr>
+                    <!--<td rowspan="2">-->
+                        <!--<div id="slider"></div>-->
+                    <!--</td>-->
+                    <td rowspan="2">
+                        <div class="symbol rocks3"></div>
+                        <!--<ul class="connexions">-->
+                            <!--<li>⌤</li>-->
+                            <!--<li>⌆</li>-->
+                            <!--<li>⍎</li>-->
+                        <!--</ul>-->
+                        <div class="symbol sand2"></div>
+                        <div class="symbol test2"></div>
+                        <div class="symbol arbres2"></div>
+                        <div class="symbol rice3"></div>
+                    </td>
+                    <td rowspan="2" class="rocks3" id="partition">
+                        <div class="compo"></div>
+                    </td>
+                    <td id="images">
+                        <img src="{{ STATIC_URL }}photos/043VAD.jpeg" />
+                        <!--<div class="legende-photos">-->
+                            <!--<a href="">004</a>-->
+                            <!--<a class="extra selected" href="">001</a>-->
+                            <!--<a class="extra" href="">001</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">005</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">020</a>-->
+                            <!--<a class="extra" href="">015</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">001</a>-->
+                            <!--<a class="extra" href="">002</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">015</a>-->
+                            <!--<a class="extra" href="">017</a>-->
+                            <!--<a class="extra" href="">004</a>-->
+                            <!--<a class="extra" href="">020</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                            <!--<a class="extra" href="">XXX</a>-->
+                        <!--</div>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>&mdash; La frontière invisible&thinsp;?</p>
+                        <p>&mdash; rassurez moi vous l'avez vu&thinsp;?</p>
+                        <p>&mdash; l'atmosphère c'est pareil partout</p>
+                        <p>&mdash; sauf que la vie elle est&hellip;</p>
+                        <p>&mdash; comment vous dire ça&thinsp;?</p>
+                        <p>&mdash; je cherchais un peu dans mes méninges, dans mon cerveau</p>
+                        <p>&mdash; (aide moi Stéphane)</p>
+                        <p>&mdash; on veut faire croire qu'elle moins monotone ici que ailleurs</p>
+                        <p>&mdash; quant on s'écarte un peu trop de la ville on veut revenir en ville</p>
+                        <p>&mdash; quant on est trop en ville sa &laquo;&thinsp;chamarde&thinsp;&raquo;</p>
+                        <p>&mdash; c'est partout pareil</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
-    <nav>
-        <ul>
-            <li>mondes</li>
-            <li>sons</li>
-            <li>traversées</li>
-            <li>images</li>
-            <li>crédits</li>
-        </ul>
-    </nav>
-</header>
-	  
-<table>
-    <colgroup>
-        <col id="col-symbols">
-        <col id="col-partition">
-        <col id="col-media">
-    </colgroup>
-    <thead>
-      <tr>
-            <th class="col1">Légende</th>
-            <th class="col2">Partition</th>
-            <th class="col3">Médias</th>
-      </tr>
-  </thead>
-      
-  <tbody>
-      <tr>
-            <td rowspan="3">
-                <div class="symbol rocks3"></div>
-                <ul class="connexions">
-                    <li>⌤</li>
-                    <li>⌆</li>
-                    <li>⍎</li>
-                </ul>
-                <div class="symbol sand2"></div>
-                <div class="symbol test2"></div>
-                <div class="symbol arbres2"></div>
-                <div class="symbol rice3"></div>
-        </td>
-        <td rowspan="3" class="rocks3" id="partition">
-        </td>
-        <td >some pictures</td>
-      </tr>
-      <tr>
-        <tr>
-        <td >some text</td>
-      </tr>
-      </tbody>
-
-</table>
-
+    <script src="{{ STATIC_URL }}lib/js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/jquery-ui.min.js"></script>
     <script src="{{ STATIC_URL }}lib/js/less-1.3.0.min.js"></script>
+    <script>
+    $(function() {
+        $( "#slider").slider({
+            orientation: "vertical",
+            min: 0,
+            max: 100,
+            value: 60,
+            slide: function( event, ui ) {
+            }
+        });
+    });
+    </script>
 </body>
 </html>
