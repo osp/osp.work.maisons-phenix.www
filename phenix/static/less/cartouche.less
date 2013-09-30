@@ -1,3 +1,11 @@
+@keyframes maskPosition {
+	from { mask-position: 0 0; }
+	to { mask-position: 0 999px; }
+}
+@-webkit-keyframes maskPosition {
+	from { -webkit-mask-position: 0 0; }
+	to { -webkit-mask-position: 0 999px; }
+}
 @keyframes animatedBackground {
 	from { background-position: 0 0; }
 	to { background-position: 0 999%; }
@@ -66,7 +74,7 @@
 }
 a {
     text-decoration:none;
-    color:black;
+    color:#5A4D33;
 }
 .selected {
     text-decoration:none;
@@ -99,10 +107,9 @@ sup {
 
 header {
     margin-bottom: 18px;
+    width: 10em;
 
     hgroup {
-        width: 400px;
-        float: left;
 
         h1 {
             font-size: 26px;
@@ -119,71 +126,88 @@ header {
     }
 
     nav {
-        margin-left: 409px;
+
     }
 }
 
 section#main {
     position: fixed;
-    top: 150px;
-    bottom: 13px;
-    left: 13px;
-    right: 39px;
+    top: 0;
+    bottom: 0;
+    left: 15em;
+    right: 13px;
 
-    table {
-        -webkit-box-sizing: border-box;
-        margin-left :26px;
-        margin-right :-26px;
-        table-layout: fixed;
-        width: 100%;
-        height: 100%;
-        border: 2px solid #5A4D33;
+    #controls {
+        z-index: 3;
+        position: absolute;
+        top: 13px;
+        bottom: 13px;
+        width: 60px;
+    }
 
-
-        #col-slider {
-            width: 22px;
-        }
-        #col-symbols {
-            width: 100px;
-        }
-
-        #col-partition {
-            width: 300px;
-        }
-
-        tbody {
-            height: 500px;
-        }   
-
-        th, td {
-            vertical-align: top;
-            padding: 9px;
-        }
-
-
-        th {
-            border: 1px solid #5A4D33;    
-            font-weight: 700;
-            letter-spacing: 1px;
-            vertical-align:middle;
-        }
-
-        td {
-            border: 1px solid #5A4D33;
-            animation: animatedBackground 20s linear infinite;
-        }
+    #partition,
+    .compo {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0px;
+    }
+    .compo {
+        width: 300px;
+        z-index: 2;
+        -webkit-animation: animatedBackground 200s linear infinite;
+    }
+    #partition {
+        width: 500px;
+        z-index: 1;
+        -webkit-animation: animatedBackground 60s linear infinite, maskPosition 20s linear infinite;
+        -webkit-mask-image: url('/static/img/mask2.png');
+        -webkit-mask-repeat: repeat-y;
     }
 
 }
+table {
+    -webkit-box-sizing: border-box;
+    table-layout: fixed;
+    position: absolute;
+    right: 13px;
+    bottom: 13px;
+    height: 100px;
+    width: 300px;
+    border: 2px solid #5A4D33;
+
+    th, td {
+        vertical-align: top;
+        padding: 9px;
+    }
+
+    th {
+        border: 1px solid #5A4D33;   
+        font-weight: 700;
+        letter-spacing: 1px;
+        vertical-align:middle;
+    }
+
+    td {
+        border: 1px solid #5A4D33;
+    }
+}
+
 
 img {
     height: 200px;
 }
 
-.symbol {
-    border: 1px solid #5A4D33;
-    margin-bottom: 4px;
-    height: 34px;
+#symbols {
+    width: 10em;
+
+    .symbol {
+        border: 1px solid #5A4D33;
+        margin-bottom: 4px;
+        height: 34px;
+        width: 79px;
+    float: left;
+    }
 }
 
 .connexions {
@@ -201,30 +225,74 @@ img {
     text-align: center;
 }
 
-#partition {
-        -webkit-animation: animatedBackground 20s linear infinite;
-}
 
-.compo {
-    -webkit-animation: animatedBackground 200s linear infinite;
-    height: 100%;
-    width: 100%;
-}
 
+#slider {
+    top: 55px;
+    bottom: 13px;
+}
 .ui-slider {
     position: absolute;
     z-index: 1;
     width: 2px;
-    height: 100%;
-    background-color: black;
+    background-color: #5A4D33;
 }
 .ui-slider-handle {
     border: 2px solid white;
     border-radius: 100%;
     width: 8px;
     height: 8px;
-    background-color: black;
+    background-color: #5A4D33;
     position: absolute;
     left: -5px;
     cursor: default;
 }
+
+
+.bubble {
+    left: -31px;
+    text-align: center;
+}
+
+.bubble 
+{
+position: relative;
+width: 60px;
+height: 20px;
+padding: 0px;
+background: #FFFFFF;
+border: #5A4D33 solid 2px;
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+}
+
+.bubble:after 
+{
+content: "";
+position: absolute;
+bottom: -6px;
+left: 24px;
+border-style: solid;
+border-width: 6px 6px 0;
+border-color: #FFFFFF transparent;
+display: block;
+width: 0;
+z-index: 1;
+}
+
+.bubble:before 
+{
+content: "";
+position: absolute;
+top: 22px;
+left: 23px;
+border-style: solid;
+border-width: 7px 7px 0;
+border-color: #5A4D33 transparent;
+display: block;
+width: 0;
+z-index: 0;
+}
+
+
