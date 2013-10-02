@@ -1,8 +1,12 @@
+import rdflib
+import markdown
+
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
-
 from django.core.urlresolvers import reverse_lazy
 
 from aawiki.models import Resource, Annotation
@@ -26,13 +30,6 @@ class AnnotationUpdateView(UpdateView):
 
 class AnnotationUpdateSuccessView(TemplateView):
     template_name = "aawiki/annotation_update_success.html"
-
-
-import markdown
-import rdflib
-
-from django.http import HttpResponse
-from django.shortcuts import render
 
 
 class ResourceDetailAsRDFView(DetailView):

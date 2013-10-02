@@ -155,8 +155,8 @@ def audacity_to_srt(data, explicit=False):
 
         #start = timecode_fromsecs(start, alwaysfract=True, alwayshours=True, fractdelim=',')
         #end = timecode_fromsecs(end, alwaysfract=True, alwayshours=True, fractdelim=',')
-        start = ms2tc(start / 1000)
-        end = ms2tc(end / 1000)
+        start = ms2tc(start * 1000, fract_delim='.')
+        end = ms2tc(end * 1000, fract_delim='.')
 
         # If the end time equals the start time we ommit it.
         if end == start:
