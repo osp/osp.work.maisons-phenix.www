@@ -21,6 +21,11 @@ body {
     height: 100%;
 }
 
+audio#resource {
+    z-index: 999;
+    position: relative;
+}
+
 #canvas {
     position: fixed;
     outline: 1px solid grey;
