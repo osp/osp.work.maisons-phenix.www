@@ -10,8 +10,7 @@
 <body>
     <header>
         <hgroup>
-            <h1>Les maisons Phenix</h1>
-            <h2>renaissent toujours de leurs cendres</h2>
+        <h1>Les<br>maisons<br>Phenix</h1>
         </hgroup>
 
         <nav>
@@ -24,19 +23,42 @@
             </ul>
         </nav>
     </header>
+
+    <div id="metadata">
+        <h1>Traversée du désert</h1>
+        <p>
+        Nec vox accusatoris ulla licet subditicii in his malorum quaerebatur acervis ut saltem specie tenus crimina praescriptis legum committerentur, quod aliquotiens fecere principes saevi: sed quicquid Caesaris implacabilitati sedisset, id velut fas iusque perpensum confestim urgebatur impleri.
+        </p>
+    </div>
           
-        <table>
-            <tr><th>Légende</th></tr>
-            <tr>
-                <td id="symbols">
-                    <div class="symbol rocks3"></div>
-                    <div class="symbol sand2"></div>
-                    <div class="symbol test2"></div>
-                    <div class="symbol arbres2"></div>
-                    <div class="symbol rice3"></div>
-                </td>
-            </tr>
-        </table>
+    <!--<table>-->
+        <!--<tr><th>Les maisons Phenix</th></tr>-->
+        <!--<tr>-->
+            <!--<td>-->
+                <!--<ul>-->
+                    <!--<li>mondes</li>-->
+                    <!--<li>sons</li>-->
+                    <!--<li>traversées</li>-->
+                    <!--<li>images</li>-->
+                    <!--<li>crédits</li>-->
+                <!--</ul>-->
+            <!--</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+
+    <table id="nomenclature">
+        <tr><th>Légende</th></tr>
+        <tr>
+            <td id="symbols">
+                <div class="symbol rocks3"></div>
+                <div class="symbol sand2"></div>
+                <div class="symbol test2"></div>
+                <div class="symbol arbres2"></div>
+                <div class="symbol rice3"></div>
+            </td>
+        </tr>
+    </table>
+
     <section id="main">
         <div id="controls">
             <div class="bubble"> 
@@ -44,6 +66,9 @@
             </div>
             <div id="slider"></div>
         </div>
+<!--zone-->
+<!--evenement sonore-->
+<!--paroles-->
         <div class="rocks3" id="partition">
         <div class="compo"></div>
         <!--<img src="{{ STATIC_URL }}photos/043VAD.jpeg" />-->
@@ -60,11 +85,38 @@
         <!--<p>&mdash; c'est partout pareil</p>-->
     </section>
 
+    <script id="tooltip-tpl" type="text/template">
+    <dl>
+        <dt>Source</dt>
+        <dd><a href="#">zone_college_labyrinthe.ogv</a></dd>
+        <dt>Thèmes</dt>
+        <dd>
+            <ul>
+                <li><a href="#">mémoire/environment</a></li>
+            </ul>
+        </dd>
+    </dl>
+    </script>
+
+    <script id="composition-list-tpl" type="text/template">
+    <ul>
+        <li><a href="#">Traversée N<sup>o</sup>1</a></li>
+    </ul>
+    </script>
+
     <script src="{{ STATIC_URL }}lib/js/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}lib/js/jquery-ui.min.js"></script>
     <script src="{{ STATIC_URL }}lib/js/less-1.3.0.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/underscore-min.js"></script>
+    <script src="{{ STATIC_URL }}lib/js/tooltipster-master/js/jquery.tooltipster.min.js"></script>
     <script>
     $(function() {
+        $('.symbol').tooltipster({
+             content: _.template($('#tooltip-tpl').html())(),
+             interactive: true,
+             interactiveTolerance: 350,
+        });
+
         $( "#slider").slider({
             orientation: "vertical",
             min: 0,
