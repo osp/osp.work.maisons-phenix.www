@@ -21,6 +21,18 @@
 	from { background-position: 0 0; }
 	to { background-position: 0 999%; }
 }
+
+@-webkit-keyframes bounce {
+	0% { margin-top: 0; }
+	50% { margin-top: 100px; }
+}
+
+@-webkit-keyframes clignotant {
+	0% { opacity: 1; }
+	49% { opacity: 1; }
+	50% { opacity: 0; }
+	99% { opacity: 0; }
+}
 // }}}
 
 
@@ -119,6 +131,10 @@ section#main {
         width: 500px;
         z-index: 1;
     }
+    #clignotant {
+        width: 100px;
+        z-index: 1;
+    }
 
 }
 #nomenclature {
@@ -206,6 +222,13 @@ section#main {
         -webkit-animation: animatedBackground 60s linear infinite, maskPosition 20s linear infinite;
         -webkit-mask-image: url('/static/img/mask2.png');
         -webkit-mask-repeat: repeat-y;
+    }
+
+    #clignotant {
+        -webkit-animation: clignotant 5s linear infinite, bounce 5s ease infinite;
+        font-weight: normal;
+        font-size: 6em;
+        line-height: 1.2em;
     }
 
 }
