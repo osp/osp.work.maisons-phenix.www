@@ -3,6 +3,10 @@
 ## Prerequisites
 
 - python &gt;= 2.5
+- python-dev
+- libxml2-dev
+- lixslt1-dev
+- libsndfile1-dev
 - pip
 - virtualenv
 
@@ -59,6 +63,7 @@ vi phenix/local_settings.py
 
 ```bash
 python manage.py syncdb
+python manage.py migrate
 ```
 
 ## Run the project

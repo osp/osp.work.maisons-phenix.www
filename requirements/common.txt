@@ -1,8 +1,9 @@
+numpy==1.7.1
 Django>=1.4,<1.5
 Markdown==2.3.1
 Pillow==2.0.0
 South==0.7.6
--e git://git.constantvzw.org/aa.core2@c4db1c7eead2db9611b10f0dfce645c4687dc4d8#egg=aacore-dev
+-e git://git.constantvzw.org/aa.core2@4a3ce0ed095f0ab1ff4d4f39a7034f3c29093d45#egg=aacore-rdflib
 amqp==1.0.8
 anyjson==0.3.3
 billiard==2.7.3.21
@@ -17,7 +18,6 @@ ipython==0.13.1
 kombu==2.5.6
 lxml==3.2.1
 mdx-semanticdata==1.1
-numpy==1.7.1
 python-dateutil==1.5
 python-magic==0.4.3
 pytz==2012j
@@ -29,3 +29,4 @@ tornado==2.4.1
 wsgiref==0.1.2
 -e git+https://github.com/PaulUithol/backbone-tastypie.git@84acd7b33f73cee98088f5d851e2e6df7443adf6#egg=Backbone_tastypie-dev
 django-tastypie==0.9.15
+rdflib==4.0.1

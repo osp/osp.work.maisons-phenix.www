@@ -21,3 +21,17 @@ SECRET_KEY = '89m6+=pj0i9m*#ih$)o^ixsp39w=zly!a3#8d!q((uio)%=j3@'
 if DEBUG:
     # Show emails in the console during developement.
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+INSTALLED_APPS += ("celery", "djcelery")
+
+import djcelery
+djcelery.setup_loader()
+
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+
+
+import os
+RDF_STORAGE_NAME = 'aa'
+# Must be an absolute path
+RDF_STORAGE_DIR = os.path.dirname(os.path.normpath(PROJECT_DIR))
