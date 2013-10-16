@@ -7,7 +7,6 @@
 - libxml2-dev
 - lixslt1-dev
 - libsndfile1-dev
-- pip
 - virtualenv
 
 ## Installation
@@ -33,23 +32,7 @@ git clone <URL_TO_GIT_REPOSITORY> phenix
 
 ```bash
 cd phenix
-pip install -r requirements/common.txt
-```
-
-Depending on the your profile (development or production), install the extra
-requirements.
-
-In a development environment, run:
-
-```bash
-cd phenix
-pip install -r requirements/dev.txt
-```
-In a production environment, run:
-
-```bash
-cd phenix
-pip install -r requirements/prod.txt
+pip install -r requirements.txt
 ```
 
 ### Configure the project

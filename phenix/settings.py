@@ -111,8 +111,7 @@ INSTALLED_APPS = (
     'aacore',
     'aawiki',
     'tastypie',
-    'backbone_tastypie',
-    'collection'
+    'backbone_tastypie'
 )
 
 # A sample logging configuration. The only tangible logging

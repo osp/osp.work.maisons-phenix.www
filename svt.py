@@ -1,1 +1,0 @@
-tools/soundviewer/svt.py
